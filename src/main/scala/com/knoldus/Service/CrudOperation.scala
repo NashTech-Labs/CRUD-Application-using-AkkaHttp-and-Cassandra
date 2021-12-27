@@ -1,16 +1,16 @@
-package com.knoldus
+package com.knoldus.Service
 
 import akka.Done
-import com.knoldus.AkkaHttpServer.system
-import com.knoldus.CassandraConnection.cassandraConnection
+import com.knoldus.Entity._
+import com.knoldus.Server.AkkaHttpServer
+import com.knoldus.db.DBConnection._
 import spray.json._
 
 import scala.concurrent.Future
 
 object CrudOperation extends StudentJson {
 
-  implicit val executionContext = system.dispatcher
-
+  implicit val executionContext = AkkaHttpServer.system.dispatcher
   //read data
   def readFromCassandra(query: String): List[Students] = {
     var studentList: List[Students] = Nil
@@ -29,19 +29,23 @@ object CrudOperation extends StudentJson {
   }
 
   //write data
-  def writeToCassandra(students:Students)={
+  def writeToCassandra(students: Students) = {
     val query = "INSERT INTO Students (rollno,name,address,subjects,course)" +
       s"VALUES(${students.rollno},'${students.name}', '${students.address}', ${students.subjects}, '${students.course}') IF NOT EXISTS;"
     cassandraConnection.execute(query)
-    Future { Done }
+    Future {
+      Done
+    }
   }
 
 
   //delete an entire row from table having given id.
-  def deleteFromCassandra(id : Int) = {
+  def deleteFromCassandra(id: Int) = {
     val query = s"DELETE FROM Students where rollno = $id ;"
     cassandraConnection.execute(query)
-    Future{Done}
+    Future {
+      Done
+    }
   }
 
 
@@ -51,10 +55,12 @@ object CrudOperation extends StudentJson {
   This update feature only valid with https
    */
 
-  def updateStudentData(rollno : Int , course : String) = {
+  def updateStudentData(rollno: Int, course: String) = {
     val query = s"UPDATE Students SET address='Lucknow' WHERE rollno=$rollno and course=$course ;"
     cassandraConnection.execute(query)
-    Future{Done}
+    Future {
+      Done
+    }
   }
 
 

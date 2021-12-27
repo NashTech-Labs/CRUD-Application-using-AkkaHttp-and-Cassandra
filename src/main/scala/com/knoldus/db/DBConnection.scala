@@ -1,8 +1,8 @@
-package com.knoldus
+package com.knoldus.db
 
 import com.datastax.driver.core.Cluster
 
-object CassandraConnection {
+object DBConnection {
 
   // creating a cassandra connection and connect with the keyspace college
   val cluster = Cluster.builder.addContactPoint("localhost").build()
