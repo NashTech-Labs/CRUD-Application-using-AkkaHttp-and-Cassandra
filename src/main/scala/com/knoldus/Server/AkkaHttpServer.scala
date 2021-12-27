@@ -7,14 +7,19 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
 import com.knoldus.Entity._
-import com.knoldus.Service.CrudOperation._
+import com.knoldus.Service.StudentManager._
 import com.knoldus.db.DBConnection._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.Future
 import scala.io.StdIn
 
 object AkkaHttpServer extends App {
+
+  val conf  = ConfigFactory.load()
+  val HOST = conf.getString("akka.host")
+  val PORT = conf.getInt("akka.port")
 
   implicit val system = ActorSystem("CURD-Application")
   implicit val materializer = ActorMaterializer()
@@ -47,7 +52,7 @@ object AkkaHttpServer extends App {
       }
 
   //Binding to the host and port
-  val bindingFuture = Http().bindAndHandle(routeForCrudApplication, "localhost", 8080)
+  val bindingFuture = Http().bindAndHandle(routeForCrudApplication,HOST, PORT)
   //Http().newServerAt(interface = "localhost", port = 8443).enableHttps(httpsServerContext).bind(route)
 
   println(s"Server is running at http://localhost:8080 .....")

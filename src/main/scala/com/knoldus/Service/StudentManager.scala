@@ -8,7 +8,7 @@ import spray.json._
 
 import scala.concurrent.Future
 
-object CrudOperation extends StudentJson {
+object StudentManager extends StudentJson {
 
   implicit val executionContext = AkkaHttpServer.system.dispatcher
   //read data
