@@ -1,4 +1,4 @@
-package com.knoldus.Server
+package com.knoldus.server
 
 import akka.Done
 import akka.actor.ActorSystem
@@ -6,8 +6,8 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.stream.ActorMaterializer
-import com.knoldus.Entity._
-import com.knoldus.Service.StudentManager._
+import com.knoldus.entity._
+import com.knoldus.service.StudentManager._
 import com.knoldus.db.DBConnection._
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import com.typesafe.config.ConfigFactory

@@ -1,8 +1,8 @@
-package com.knoldus.Service
+package com.knoldus.service
 
 import akka.Done
-import com.knoldus.Entity._
-import com.knoldus.Server.AkkaHttpServer
+import com.knoldus.entity._
+import com.knoldus.server.AkkaHttpServer
 import com.knoldus.db.DBConnection._
 import spray.json._
 

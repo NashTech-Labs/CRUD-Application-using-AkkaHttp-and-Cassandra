@@ -1,6 +1,8 @@
-package com.knoldus.Entity
+package com.knoldus.entity
 
 import spray.json.DefaultJsonProtocol
+
+case class Students(rollno: Int, name: String, address: String, subjects: Int, course: String)
 
 trait StudentJson extends DefaultJsonProtocol {
 
